@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>تحميل سكربيت التفاحة</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Cairo', sans-serif;
+      background: linear-gradient(135deg, #000000, #2c0000);
+      color: #f2f2f2;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+    .intro {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      background: #000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 60px;
+      animation: fadeOut 1s ease 3s forwards;
+      z-index: 1000;
+    }
+    .intro span {
+      opacity: 0;
+      transform: scale(0.5);
+      animation: zoomIn 1s forwards;
+    }
+    .intro span:nth-child(2) {
+      animation-delay: 1.3s;
+    }
+    @keyframes zoomIn {
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+    @keyframes fadeOut {
+      to {
+        opacity: 0;
+        visibility: hidden;
+      }
+    }
+    .hidden { display: none !important; }
+    .container, .step2 {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      max-width: 420px;
+      padding: 30px 20px;
+      background: #1a1a1a;
+      border-radius: 18px;
+      box-shadow: 0 8px 25px rgba(255, 0, 0, 0.2);
+      animation: fadeIn 0.8s ease;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .show { display: flex !important; }
+    input[type="text"] {
+      width: 100%;
+      padding: 12px;
+      border-radius: 10px;
+      border: 1px solid #e53935;
+      background: #1f1f1f;
+      color: #ff8a80;
+      font-size: 16px;
+      margin-bottom: 15px;
+      outline: none;
+    }
+    .btn, .download-btn {
+      background: #d50000;
+      color: white;
+      border: none;
+      padding: 13px;
+      font-size: 16px;
+      font-weight: bold;
+      border-radius: 12px;
+      width: 100%;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    .btn:hover, .download-btn:hover {
+      background: #ff1744;
+    }
+    .conditions {
+      background: #2b2b2b;
+      padding: 15px;
+      border-radius: 12px;
+      border-right: 4px solid #ff1744;
+      margin-bottom: 20px;
+      font-size: 15px;
+      line-height: 1.8;
+    }
+    .conditions::before {
+      content: "📋 الشروط:";
+      display: block;
+      font-weight: bold;
+      font-size: 17px;
+      margin-bottom: 8px;
+      color: #ff5252;
+    }
+    .download-btn-app {
+      display: inline-block;
+      background: linear-gradient(to right, #d50000, #b71c1c);
+      color: white;
+      padding: 14px 20px;
+      font-size: 16px;
+      border-radius: 50px;
+      font-weight: bold;
+      text-decoration: none;
+      transition: transform 0.3s ease;
+      box-shadow: 0 4px 12px rgba(255, 0, 0, 0.2);
+      width: 100%;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .download-btn-app:hover { transform: scale(1.05); }
+    .script-download.locked {
+      background: #444;
+      color: #aaa;
+      text-align: center;
+      padding: 12px;
+      border-radius: 12px;
+      font-weight: bold;
+      margin-bottom: 15px;
+    }
+    .id-input input {
+      width: 100%;
+      border: none;
+      background: #1f1f1f;
+      border: 1px solid #e53935;
+      padding: 12px;
+      border-radius: 10px;
+      color: #ff8a80;
+      font-size: 15px;
+      outline: none;
+      direction: rtl;
+    }
+    .download-btn:disabled {
+      background: #555;
+      color: #999;
+      cursor: not-allowed;
+    }
+    .promo-box-animated {
+      width: 100%;
+      background: linear-gradient(135deg, #ff0000, #b40000);
+      padding: 20px;
+      border-radius: 18px;
+      animation: fadeInPromo 1s ease forwards;
+      box-shadow: 0 4px 12px rgba(255, 0, 0, 0.3);
+      margin-bottom: 20px;
+    }
+    @keyframes fadeInPromo {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
+    }
+  </style>
+</head>
+<body>
+  <div class="intro"><span>🍎</span><span>🛩️</span></div>
+  <div class="container" id="step1">
+    <h3 style="text-align:center; margin-bottom: 30px;">🍎🛩️ ادخل كود تفعيل السكربت</h3>
+    <input type="text" id="accessCode" placeholder="ادخل الكود هنا">
+    <button class="btn" onclick="checkCode()">🔐 تأكيد الكود</button>
+  </div>
+  <div class="step2" id="step2">
+    <div class="conditions">
+      <p>✅ حمّل التطبيق وسجل بالكود <strong style="color:#ff5252;">BL200</strong></p>
+      <p>✅ اعمل إيداع عالتطبيق بـ200ج أو أكتر (مش أقل)</p>
+      <p>✅ خد الـ ID بتاعك كوبي، دخله في الخانة اللي تحت ومبروك عليك السكربت ✨</p>
+    </div>
+    <a class="download-btn-app" href="https://chill2win.fun/L?tag=d_4272540m_72473c_&site=4272540&ad=72473">📲 تحميل التطبيق للأندرويد</a>
+    <div class="promo-box-animated">
+      <div style="font-size: 20px; font-weight: bold; color: #fff; text-align: center; margin-bottom: 15px;">
+        🎁 كودك: <span style="color: #fff; font-weight: bold;">BL200</span>
+      </div>
+      <button onclick="copyPromo()" style="background: #cc0000; color: white; border: none; padding: 14px 0; width: 100%; border-radius: 12px; font-size: 17px; font-weight: bold; cursor: pointer;">📋 نسخ الكود</button>
+    </div>
+    <div class="script-download locked" id="scriptStatus">🔒 تحميل السكربت (سيتم فتحه بعد إتمام الشروط)</div>
+    <div class="id-input" style="margin-top: 20px; width: 100%;">
+      <input type="text" id="userID" placeholder="ادخل ID الحساب بعد التسجيل والإيداع" oninput="handleInput(this)">
+    </div>
+    <button class="download-btn" id="finalDownload" disabled>⬇️ تحميل السكربت</button>
+  </div>
+  <script>
+    const validCodes = ['Q7K6IP3P','0XAVGN63','7YFQZ9V2','4H8J3K9L','6X2P5R7V','1Z9Y4D2B','9M8N6L5P','3C7V1X8Z','2W5R6T9Q','0A3S8D6F','7G5H3J1K','4Q2W9E8R','5T6Y3U1I','2O4P8L7K','9J3H6G5F','1D2S8A7Z','3X9C5V6B','8N7M4L1K','2Q5W7E3R','6T1Y8U9I','4O3P6A5S','9D8F2G7H','3J1K4L6Z','5X7C2V8B','7N9M0Q1W','1E2R3T4Y','6U7I8O9P','4A5S6D7F','9G8H1J2K','0L1Z2X3C'];
+    setTimeout(() => {
+      document.querySelector('.intro').classList.add('hidden');
+      document.getElementById('step1').classList.add('show');
+    }, 4000);
+    function checkCode() {
+      const code = document.getElementById("accessCode").value.trim();
+      if (validCodes.includes(code)) {
+        document.getElementById("step1").classList.remove("show");
+        document.getElementById("step2").classList.add("show");
+      } else {
+        alert("❌ الكود غير صحيح، حاول مرة تانية!");
+      }
+    }
+    function copyPromo() {
+      const textArea = document.createElement("textarea");
+      textArea.value = "BL200";
+      document.body.appendChild(textArea);
+      textArea.select();
+      document.execCommand("copy");
+      document.body.removeChild(textArea);
+      alert("✅ تم نسخ البروموكود!");
+    }
+    function handleInput(input) {
+      const btn = document.getElementById("finalDownload");
+      btn.disabled = input.value.trim().length < 3;
+    }
+  </script>
+</body>
+</html>
