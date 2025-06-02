@@ -2,58 +2,64 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
-  <title>تحميل سكربيت التفاحة</title>
+  <title>تحميل سكريبت التفاحة 🍎</title>
+  <link rel="icon" href="helicopter.png" type="image/png">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@500;700&display=swap" rel="stylesheet">
   <style>
     * { box-sizing: border-box; }
     body {
       margin: 0;
-      padding: 0;
       font-family: 'Cairo', sans-serif;
       background: linear-gradient(135deg, #000000, #2c0000);
-      color: #f2f2f2;
+      color: white;
       min-height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
-      overflow: hidden;
+      flex-direction: column;
+      overflow-x: hidden;
     }
-    .intro {
+
+    /* صفحة التحميل */
+    .loading-screen {
       position: absolute;
       top: 0; left: 0;
       width: 100%;
       height: 100%;
-      background: #000;
+      background: linear-gradient(135deg, #000000, #2c0000);
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
-      font-size: 60px;
-      animation: fadeOut 1s ease 3s forwards;
-      z-index: 1000;
+      z-index: 999;
     }
-    .intro span {
-      opacity: 0;
-      transform: scale(0.5);
-      animation: zoomIn 1s forwards;
+    .loading-screen img {
+      width: 120px;
+      animation: float 1.5s ease-in-out infinite alternate;
     }
-    .intro span:nth-child(2) {
-      animation-delay: 1.3s;
+    .loading-screen h2 {
+      margin-top: 20px;
+      font-size: 24px;
+      animation: blink 1.2s infinite;
     }
-    @keyframes zoomIn {
-      to {
-        opacity: 1;
-        transform: scale(1);
-      }
+    @keyframes float {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-15px); }
+    }
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+    .fade-out {
+      animation: fadeOut 0.6s ease forwards;
     }
     @keyframes fadeOut {
-      to {
-        opacity: 0;
-        visibility: hidden;
-      }
+      to { opacity: 0; visibility: hidden; }
     }
-    .hidden { display: none !important; }
-    .container, .step2 {
+
+    /* صفحة الشروط */
+    .step2 {
       display: none;
       flex-direction: column;
       justify-content: center;
@@ -65,12 +71,13 @@
       border-radius: 18px;
       box-shadow: 0 8px 25px rgba(255, 0, 0, 0.2);
       animation: fadeIn 0.8s ease;
+      position: relative;
+      z-index: 1;
     }
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
     }
-    .show { display: flex !important; }
     input[type="text"] {
       width: 100%;
       padding: 12px;
@@ -169,31 +176,71 @@
       from { opacity: 0; transform: scale(0.9); }
       to { opacity: 1; transform: scale(1); }
     }
-    .hint {
-      font-size: 13px;
-      color: #ccc;
-      margin-top: -20px;
-      margin-bottom: 25px;
-      text-align: center;
-    }
     .fake-counter {
       font-size: 14px;
       color: #eee;
       text-align: center;
       margin-top: 10px;
     }
+
+    /* صفحة التحذير */
+    .warning-page {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #000, #2c0000);
+      color: #fff;
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 2000;
+    }
+    .warning-box {
+      background: #1a1a1a;
+      padding: 30px;
+      border-radius: 18px;
+      max-width: 420px;
+      width: 90%;
+      text-align: center;
+      box-shadow: 0 6px 18px rgba(255, 0, 0, 0.3);
+      animation: fadeIn 0.6s ease;
+    }
+    .warning-box h2 {
+      font-size: 22px;
+      color: #ff5252;
+      margin-bottom: 20px;
+    }
+    .warning-box ul {
+      text-align: right;
+      padding: 0;
+      list-style: none;
+      margin-bottom: 25px;
+    }
+    .warning-box ul li {
+      margin-bottom: 12px;
+      font-size: 15px;
+      line-height: 1.7;
+      position: relative;
+      padding-right: 22px;
+    }
+    .warning-box ul li::before {
+      content: "⚠️";
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
   </style>
 </head>
 <body>
-  <div class="intro"><span>🍎</span><span>🛩️</span></div>
 
-  <div class="container" id="step1">
-    <h3 style="text-align:center; margin-bottom: 10px;">🍎🛩️ ادخل كود تفعيل السكربت</h3>
-    <div class="hint">📌 ادخل رقم <strong>888</strong></div>
-    <input type="text" id="accessCode" placeholder="اكتب هنا 888">
-    <button class="btn" onclick="checkCode()">🔐 تأكيد الكود</button>
+  <!-- صفحة التحميل -->
+  <div class="loading-screen" id="loadingScreen">
+    <img src="helicopter.png" alt="طيارة">
+    <h2>جاري التحميل...</h2>
   </div>
 
+  <!-- صفحة الشروط -->
   <div class="step2" id="step2">
     <div class="conditions">
       <p>✅ حمّل التطبيق وسجل بالكود <strong style="color:#ff5252;">BL200</strong></p>
@@ -209,13 +256,12 @@
       </div>
       <div id="fakeCount" class="fake-counter">👤 استخدمه حتى الآن: 1234 مستخدم</div>
       <button onclick="copyPromo()" style="background: #cc0000; color: white; border: none; padding: 14px 0; width: 100%; border-radius: 12px; font-size: 17px; font-weight: bold; cursor: pointer;">📋 نسخ الكود</button>
-<a href="https://t.me/Gassersaad1" target="_blank"
-   style="display:block; margin-top: 12px; background: #0088cc; color: white; padding: 13px 0;
-   width: 100%; border-radius: 12px; font-size: 16px; font-weight: bold; text-align: center;
-   text-decoration: none; transition: transform 0.3s ease;">
-   💬 كلمني على تيلجرام
-</a>
-
+      <a href="https://t.me/Gassersaad1" target="_blank"
+         style="display:block; margin-top: 12px; background: #0088cc; color: white; padding: 13px 0;
+         width: 100%; border-radius: 12px; font-size: 16px; font-weight: bold; text-align: center;
+         text-decoration: none; transition: transform 0.3s ease;">
+         💬 كلمني على تيلجرام
+      </a>
     </div>
 
     <div class="script-download locked" id="scriptStatus">🔒 تحميل السكربت (سيتم فتحه بعد إتمام الشروط)</div>
@@ -231,21 +277,37 @@
     </div>
   </div>
 
-  <script>
-    setTimeout(() => {
-      document.querySelector('.intro').classList.add('hidden');
-      document.getElementById('step1').classList.add('show');
-    }, 4000);
+  <!-- صفحة التحذير -->
+  <div class="warning-page" id="warningPage">
+    <div class="warning-box">
+      <h2>⚠️ ملاحظات مهمة قبل التحميل</h2>
+      <ul>
+        <li>✅ طلبك بيتم مراجعته يدويًا خلال دقائق.</li>
+        <li>🚫 لو ماكملتش الشروط المطلوبة، مش هتقدر تستخدم السكربت.</li>
+        <li>🔐 دي نسخة محمية، ومش بتشتغل إلا بعد التفعيل الكامل.</li>
+      </ul>
+      <button class="btn" onclick="goBack()">🔙 رجوع للصفحة السابقة</button>
+      <a href="https://t.me/Gassersaad1" target="_blank"
+         style="display:block; margin-top: 20px; background: #0088cc; color: white; padding: 13px 0;
+         width: 100%; border-radius: 12px; font-size: 16px; font-weight: bold; text-align: center;
+         text-decoration: none; transition: transform 0.3s ease;">
+         💬 كلمني على تيلجرام
+      </a>
+      <p style="margin-top: 14px; font-size: 15px; color: #ccc; text-align: center;">
+        لو مخلص الشروط كلمني هنا على التيلجرام أبعتلك الاسكريبت.
+      </p>
+    </div>
+  </div>
 
-    function checkCode() {
-      const code = document.getElementById("accessCode").value.trim();
-      if (code === "888") {
-        document.getElementById("step1").classList.remove("show");
-        document.getElementById("step2").classList.add("show");
-      } else {
-        alert("❌ الكود غير صحيح، حاول مرة تانية!");
-      }
-    }
+  <script>
+    // التحميل → صفحة الشروط
+    setTimeout(() => {
+      document.getElementById("loadingScreen").classList.add("fade-out");
+      setTimeout(() => {
+        document.getElementById("loadingScreen").style.display = "none";
+        document.getElementById("step2").style.display = "flex";
+      }, 600);
+    }, 3000);
 
     function copyPromo() {
       const textArea = document.createElement("textarea");
@@ -262,10 +324,19 @@
       btn.disabled = input.value.trim().length < 3;
     }
 
+    document.getElementById("finalDownload").addEventListener("click", function () {
+      document.getElementById("step2").style.display = "none";
+      document.getElementById("warningPage").style.display = "flex";
+    });
+
+    function goBack() {
+      document.getElementById("warningPage").style.display = "none";
+      document.getElementById("step2").style.display = "flex";
+    }
+
     const fakeNumber = Math.floor(Math.random() * (2500 - 800 + 1)) + 800;
     document.getElementById('fakeCount').innerText = `👤 استخدمه حتى الآن: ${fakeNumber} مستخدم`;
 
-    // آخر تفعيل
     const generateFakeID = () => {
       const chars = "0123456789@#$%&*!";
       let id = "";
