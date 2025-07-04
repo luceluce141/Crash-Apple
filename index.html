@@ -242,8 +242,8 @@
   <div class="step2" id="step2">
     <div class="conditions">
       <p>✅ حمّل التطبيق وسجل بالكود <strong style="color:#02F46B;">Bouns40</strong></p>
-      <p>✅ اعمل إيداع عالتطبيق بـ120ج أو أكتر (مش أقل)</p>
-      <p>✅ خد الـ ID بتاعك كوبي، دخله في الخانة اللي تحت ومبروك عليك السكربت ✨</p>
+      <p>✅ اعمل إيداع عالتطبيق بـ150ج أو أكتر (مش أقل)</p>
+      <p>✅ خد الID بتاعك كوبي , وابعتهولي علي التيلجرام واستلم كود التفعيل ✨</p>
     </div>
 
     <a class="download-btn-app" href="https://fastpaff.top/L?tag=d_4451156m_95572c_&site=4451156&ad=95572">📲 تحميل التطبيق للأندرويد</a>
@@ -262,13 +262,15 @@
       </a>
     </div>
 
-    <div class="script-download locked" id="scriptStatus">🔒 تحميل السكربت (سيتم فتحه بعد إتمام الشروط)</div>
+    
 
-    <div class="id-input" style="margin-top: 20px; width: 100%;">
-      <input type="text" id="userID" placeholder="ادخل ID الحساب بعد التسجيل والإيداع" oninput="handleInput(this)">
-    </div>
+    <button class="download-btn" id="finalDownload">⬇️ تحميل السكربت</button>
+<script>
+  document.getElementById("finalDownload").addEventListener("click", function () {
+    window.open("https://drive.google.com/uc?export=download&id=1YjYzURjQZ9hm7OvVpTdf1S54PZOk8D_v", "_blank");
+  });
+</script>
 
-    <button class="download-btn" id="finalDownload" disabled>⬇️ تحميل السكربت</button>
 
     <div id="lastActivation" style="margin: 10px auto 0; background: #1a1a1a; padding: 8px 15px; border-radius: 8px; font-size: 13px; font-weight: bold; color: #ccc; text-align: center; width: fit-content; box-shadow: 0 0 5px rgba(255, 0, 0, 0.1);">
       🔄 User ID: ********** ✅
@@ -276,25 +278,7 @@
   </div>
 
   <!-- صفحة التحذير -->
-  <div class="warning-page" id="warningPage">
-    <div class="warning-box">
-      <h2>⚠️ ملاحظات مهمة قبل التحميل</h2>
-      <ul>
-        <li>✅ طلبك بيتم مراجعته يدويًا خلال دقائق.</li>
-        <li>🚫 لو ماكملتش الشروط المطلوبة، مش هتقدر تستخدم السكربت.</li>
-        <li>🔐 دي نسخة محمية، ومش بتشتغل إلا بعد التفعيل الكامل.</li>
-      </ul>
-      <button class="btn" onclick="goBack()">🔙 رجوع للصفحة السابقة</button>
-      <a href="https://t.me/Gassersaad1" target="_blank"
-         style="display:block; margin-top: 20px; background: #0088cc; color: white; padding: 13px 0;
-         width: 100%; border-radius: 12px; font-size: 16px; font-weight: bold; text-align: center;
-         text-decoration: none; transition: transform 0.3s ease;">
-         💬 كلمني على تيلجرام
-      </a>
-      <p style="margin-top: 14px; font-size: 15px; color: #ccc; text-align: center;">
-        لو مخلص الشروط كلمني هنا على التيلجرام أبعتلك الاسكريبت.
-      </p>
-    </div>
+  
   </div>
 
   <script>
@@ -309,7 +293,7 @@
 
     function copyPromo() {
       const textArea = document.createElement("textarea");
-      textArea.value = "BL200";
+      textArea.value = "Bouns40";
       document.body.appendChild(textArea);
       textArea.select();
       document.execCommand("copy");
@@ -322,15 +306,9 @@
       btn.disabled = input.value.trim().length < 3;
     }
 
-    document.getElementById("finalDownload").addEventListener("click", function () {
-      document.getElementById("step2").style.display = "none";
-      document.getElementById("warningPage").style.display = "flex";
-    });
+    
 
-    function goBack() {
-      document.getElementById("warningPage").style.display = "none";
-      document.getElementById("step2").style.display = "flex";
-    }
+    
 
     const fakeNumber = Math.floor(Math.random() * (2500 - 800 + 1)) + 800;
     document.getElementById('fakeCount').innerText = `👤 استخدمه حتى الآن: ${fakeNumber} مستخدم`;
