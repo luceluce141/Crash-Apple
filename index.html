@@ -1,334 +1,447 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html dir="rtl" lang="ar">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>تحميل سكريبت التفاحة 🍎</title>
-  <link rel="icon" href="helicopter.png" type="image/png">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet"/>
   <style>
-    * { box-sizing: border-box; }
+@keyframes loadingFadeIn {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+@keyframes loadingFloat {
+  0% {transform: translateY(0);}
+  50% {transform: translateY(-15px);}
+  100% {transform: translateY(0);}
+}
+@keyframes loadingHeliFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+@keyframes loadingHeliGlow {
+  0%, 100% { filter: drop-shadow(0 0 10px red); }
+  50% { filter: drop-shadow(0 0 25px #ff2e2e); }
+}
+#loadingScreen {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(135deg, #000000, #8b0000);
+  z-index: 99999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  font-family: 'Cairo', sans-serif;
+  font-size: 24px;
+  color: white;
+  animation: loadingFadeIn 2s ease-in;
+}
+#loadingScreen img {
+  width: 140px;
+  margin-bottom: 20px;
+  opacity: 0.2;
+  filter: drop-shadow(0 0 10px red);
+  animation: loadingFloat 3s ease-in-out infinite;
+}
+.bg-icon.loading-heli {
+  animation: loadingHeliFloat 4s ease-in-out infinite, loadingHeliGlow 6s ease-in-out infinite;
+}
+
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      margin: 0;
       font-family: 'Cairo', sans-serif;
-      background: linear-gradient(135deg, #18243C, #02F46B);
+      background: radial-gradient(circle at top, #3c0000, #000000);
+      background-size: cover;
       color: white;
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      overflow-x: hidden;
-    }
-
-    /* صفحة التحميل */
-    .loading-screen {
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(135deg, #02F46B, #18243C);
+      padding: 40px 20px;
       display: flex;
       flex-direction: column;
-      justify-content: center;
       align-items: center;
-      z-index: 999;
     }
-    .loading-screen img {
-      width: 120px;
-      animation: float 1.5s ease-in-out infinite alternate;
+    .section {
+      width: 100%;
+      max-width: 500px;
+      margin-bottom: 32px;
+      text-align: center;
     }
-    .loading-screen h2 {
-      margin-top: 20px;
-      font-size: 24px;
-      animation: blink 1.2s infinite;
-    }
-    @keyframes float {
-      0% { transform: translateY(0); }
-      100% { transform: translateY(-15px); }
-    }
-    @keyframes blink {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.4; }
-    }
-    .fade-out {
-      animation: fadeOut 0.6s ease forwards;
-    }
-    @keyframes fadeOut {
-      to { opacity: 0; visibility: hidden; }
-    }
-
-    /* صفحة الشروط */
-    .step2 {
-      display: none;
-      flex-direction: column;
-      justify-content: center;
+    .btn {
+      display: inline-flex;
       align-items: center;
+      justify-content: center;
+      gap: 8px;
       width: 100%;
-      max-width: 420px;
-      padding: 30px 20px;
-      background: #1a1a1a;
-      border-radius: 18px;
-      box-shadow: 0 8px 25px rgb(2, 244, 107);
-      animation: fadeIn 0.8s ease;
-      position: relative;
-      z-index: 1;}
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    input[type="text"] {
-      width: 100%;
-      padding: 12px;
-      border-radius: 10px;
-      border: 1px solid #e53935;
-      background: #1f1f1f;
-      color: #ff8a80;
-      font-size: 16px;
-      margin-bottom: 15px;
-      outline: none;
-    }
-    .btn, .download-btn {
-      background: #02F46B;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: bold;
       color: white;
       border: none;
-      padding: 13px;
-      font-size: 16px;
-      font-weight: bold;
-      border-radius: 12px;
-      width: 100%;
+      border-radius: 40px;
       cursor: pointer;
-      transition: background 0.3s ease;
-    }
-    .btn:hover, .download-btn:hover {
-      background: #ff1744;
-    }
-    .conditions {
-      background: #18243C;
-      padding: 15px;
-      border-radius: 12px;
-      border-right: 4px solid #02F46B;
-      margin-bottom: 20px;
-      font-size: 15px;
-      line-height: 1.8;
-    }
-    .conditions::before {
-      content: "📋 شروط تحميل اسكريبت تطبيق FastPari:";
-      display: block;
-      font-weight: bold;
-      font-size: 17px;
-      margin-bottom: 8px;
-      color: #02F46B;
-    }
-    .download-btn-app {
-      display: inline-block;
-      background: linear-gradient(to right, #02F46B, #18243C);
-      color: white;
-      padding: 14px 20px;
-      font-size: 16px;
-      border-radius: 50px;
-      font-weight: bold;
-      text-decoration: none;
       transition: transform 0.3s ease;
-      box-shadow: 0 4px 12px rgb(2, 244, 107);
-      width: 100%;
-      text-align: center;
-      margin-bottom: 20px;}
-    .download-btn-app:hover { transform: scale(1.05); }
-    .script-download.locked {
-      background: #444;
-      color: #aaa;
-      text-align: center;
-      padding: 12px;
-      border-radius: 12px;
+    }
+    .btn:hover { transform: scale(1.05); }
+    .main-btn {
+      background: linear-gradient(135deg, #fc466b, #3f5efb);
+      animation: pulse 2s infinite;
+    }
+    .app-btn {
+      background: linear-gradient(135deg, #00f2fe, #4facfe);
+    }
+    .tg-btn {
+      background: linear-gradient(135deg, #229ED9, #4facfe);
+    }
+    @keyframes pulse {
+      0% { box-shadow: 0 0 15px #fc466b; }
+      50% { box-shadow: 0 0 30px #3f5efb; }
+      100% { box-shadow: 0 0 15px #fc466b; }
+    }
+    .promo-block {
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(12px);
+      border-radius: 16px;
+      padding: 16px;
+      margin-top: 12px;
+    }
+    .promo-title {
+      font-size: 18px;
       font-weight: bold;
-      margin-bottom: 15px;
+      margin-bottom: 10px;
     }
-    .id-input input {
-      width: 100%;
-      border: none;
-      background: #1f1f1f;
-      border: 1px solid #02F46B;
-      padding: 12px;
-      border-radius: 10px;
-      color: #ff8a80;
-      font-size: 15px;
-      outline: none;
-      direction: rtl;
-    }
-    .download-btn:disabled {
-      background: #555;
-      color: #999;
-      cursor: not-allowed;
-    }
-    .promo-box-animated {
-      width: 100%;
-      background: linear-gradient(135deg, #02F46B, #18243C);
-      padding: 20px;
-      border-radius: 18px;
-      animation: fadeInPromo 1s ease forwards;
-      box-shadow: 0 4px 12px rgb(2, 244, 107);
-      margin-bottom: 20px;
-    }
-    @keyframes fadeInPromo {
-      from { opacity: 0; transform: scale(0.9); }
-      to { opacity: 1; transform: scale(1); }
-    }
-    .fake-counter {
-      font-size: 14px;
-      color: #eee;
-      text-align: center;
-      margin-top: 10px;
-    }
-
-    /* صفحة التحذير */
-    .warning-page {
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%;
-      min-height: 100vh;
-      background: linear-gradient(135deg, #000, #2c0000);
-      color: #fff;
-      display: none;
-      justify-content: center;
-      align-items: center;
-      z-index: 2000;
-    }
-    .warning-box {
-      background: #1a1a1a;
-      padding: 30px;
-      border-radius: 18px;
-      max-width: 420px;
-      width: 90%;
-      text-align: center;
-      box-shadow: 0 6px 18px rgb(2, 244, 107);
-      animation: fadeIn 0.6s ease;
-    }
-    .warning-box h2 {
-      font-size: 22px;
+    .promo-code {
+      font-size: 24px;
       color: #02F46B;
-      margin-bottom: 20px;
+      font-weight: bold;
     }
-    .warning-box ul {
-      text-align: right;
-      padding: 0;
-      list-style: none;
-      margin-bottom: 25px;
+    .copy-btn {
+      margin-top: 10px;
+      padding: 8px 20px;
+      border: 2px solid #02F46B;
+      background: transparent;
+      color: #02F46B;
+      border-radius: 30px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: 0.3s ease;
     }
-    .warning-box ul li {
-      margin-bottom: 12px;
-      font-size: 15px;
-      line-height: 1.7;
+    .copy-btn:hover {
+      background: #02F46B;
+      color: #000;
+    }
+    .glass-box {
       position: relative;
-      padding-right: 22px;
+      background: rgba(255, 255, 255, 0.07);
+      backdrop-filter: blur(10px);
+      border-radius: 18px;
+      padding: 24px 20px;
+      font-size: 17px;
+      text-align: right;
+      line-height: 2;
+      overflow: hidden;
     }
-    .warning-box ul li::before {
-      content: "⚠️";
+    .glass-box img.bg-icon {
       position: absolute;
-      right: 0;
-      top: 0;
+      top: -30px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 160px;
+      opacity: 0.2;
+      filter: drop-shadow(0 0 8px red);
     }
-  </style>
-</head>
-<body>
-
-  <!-- صفحة التحميل -->
-  <div class="loading-screen" id="loadingScreen">
-    <img src="helicopter.png" alt="طيارة">
-    <h2>جاري التحميل...</h2>
-  </div>
-
-  <!-- صفحة الشروط -->
-  <div class="step2" id="step2">
-    <div class="conditions">
-      <p>✅ حمّل التطبيق وسجل بالكود <strong style="color:#02F46B;">Bouns40</strong></p>
-      <p>✅ اعمل إيداع عالتطبيق بـ150ج أو أكتر (مش أقل)</p>
-      <p>✅ خد الID بتاعك كوبي , وابعتهولي علي التيلجرام واستلم كود التفعيل ✨</p>
-    </div>
-
-    <a class="download-btn-app" href="https://fastpaff.top/L?tag=d_4451156m_95572c_&site=4451156&ad=95572">📲 تحميل التطبيق للأندرويد</a>
-
-    <div class="promo-box-animated">
-      <div style="font-size: 20px; font-weight: bold; color: #fff; text-align: center; margin-bottom: 10px;">
-        🎁 بروموكود: <span style="color: #18243C; font-weight: bold;">Bouns40</span>
-      </div>
-      <div id="fakeCount" class="fake-counter">👤 استخدمه حتى الآن: 1234 مستخدم</div>
-      <button onclick="copyPromo()" style="background: #18243C; color: white; border: none; padding: 14px 0; width: 100%; border-radius: 12px; font-size: 17px; font-weight: bold; cursor: pointer;">📋 نسخ الكود</button>
-      <a href="https://t.me/Gassersaad1" target="_blank"
-         style="display:block; margin-top: 12px; background: #0088cc; color: white; padding: 13px 0;
-         width: 100%; border-radius: 12px; font-size: 16px; font-weight: bold; text-align: center;
-         text-decoration: none; transition: transform 0.3s ease;">
-         💬 كلمني على تيلجرام
-      </a>
-    </div>
-
-    
-
-    <button class="download-btn" id="finalDownload">⬇️ تحميل السكربت</button>
-<script>
-  document.getElementById("finalDownload").addEventListener("click", function () {
-    window.open("https://t.me/+xkVGoL6Us0dkYjRh", "_blank");
-  });
-</script>
-
-
-    <div id="lastActivation" style="margin: 10px auto 0; background: #1a1a1a; padding: 8px 15px; border-radius: 8px; font-size: 13px; font-weight: bold; color: #ccc; text-align: center; width: fit-content; box-shadow: 0 0 5px rgba(255, 0, 0, 0.1);">
-      🔄 User ID: ********** ✅
-    </div>
-  </div>
-
-  <!-- صفحة التحذير -->
+    .counter, .user-id {
+      text-align: center;
+      font-size: 16px;
+      color: #ccc;
+      margin-top: 12px;
+    }
+    #popup {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(0,0,0,0.85);
+      color: #02F46B;
+      padding: 16px 28px;
+      border-radius: 20px;
+      font-weight: bold;
+      font-size: 18px;
+      z-index: 9999;
+      display: none;
+      animation: fadeInOut 3s ease forwards;
+    }
+    @keyframes fadeInOut {
+      0% { opacity: 0; transform: translate(-50%, -60%); }
+      10% { opacity: 1; transform: translate(-50%, -50%); }
+      90% { opacity: 1; }
+      100% { opacity: 0; transform: translate(-50%, -40%); }
+    }
   
-  </div>
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
 
+    body {
+      animation: fadeInBody 1s ease-in-out;
+    }
+
+    @keyframes fadeInBody {
+      0% { opacity: 0; transform: translateY(20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    .section {
+      animation: fadeInSection 1.2s ease forwards;
+      opacity: 0;
+    }
+
+    @keyframes fadeInSection {
+      0% { opacity: 0; transform: translateY(20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    body {
+      background: linear-gradient(-45deg, #3c0000, #000000, #3c0000, #000000);
+      background-size: 400% 400%;
+      animation: gradientBG 10s ease infinite;
+    }
+
+    .btn {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 15px rgba(255,255,255,0.3);
+    }
+
+    /* Shine effect on button */
+    .btn::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -75%;
+      width: 50%;
+      height: 100%;
+      background: linear-gradient(120deg, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0) 100%);
+      transform: skewX(-20deg);
+      animation: shine 6s infinite;
+    }
+
+    @keyframes shine {
+      0% { left: -75%; }
+      50% { left: 125%; }
+      100% { left: 125%; }
+    }
+
+    .tg-btn {
+      border: 1px solid #229ED9;
+      box-shadow: 0 0 12px #229ED9;
+    }
+
+    .promo-block {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .promo-block::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -80%;
+      width: 60%;
+      height: 100%;
+      background: linear-gradient(120deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0) 100%);
+      transform: skewX(-20deg);
+      animation: shine 5s infinite;
+    }
+
+    #popup {
+      font-family: 'Cairo', sans-serif;
+      background: rgba(255, 255, 255, 0.95);
+      color: #000;
+      font-size: 16px;
+      box-shadow: 0 0 20px #02F46B;
+      border: 2px solid #02F46B;
+    }
+
+    .glass-box {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .glass-box::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -75%;
+      width: 50%;
+      height: 100%;
+      background: linear-gradient(120deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.0) 100%);
+      transform: skewX(-20deg);
+      animation: shine 4s infinite;
+    }
+
+    .bg-icon.animated-heli {
+      position: absolute;
+      top: 220px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 200px;
+      opacity: 0.15;
+      animation: heliFloat 4s ease-in-out infinite, heliGlow 6s ease-in-out infinite;
+    }
+
+    @keyframes heliFloat {
+      0%, 100% { transform: translate(-50%, 0); }
+      50% { transform: translate(-50%, 10px); }
+    }
+
+    @keyframes heliGlow {
+      0%, 100% { filter: drop-shadow(0 0 10px red); }
+      50% { filter: drop-shadow(0 0 25px #ff2e2e); }
+    }
+    
+/* Fade and slide in animation */
+@keyframes fadeSlideIn {
+  0% { opacity: 0; transform: translateY(40px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+.section {
+  animation: fadeSlideIn 0.9s ease forwards;
+  opacity: 0;
+}
+
+/* Add stagger effect using nth-child */
+.section:nth-child(1) { animation-delay: 0.2s; }
+.section:nth-child(2) { animation-delay: 0.4s; }
+.section:nth-child(3) { animation-delay: 0.6s; }
+.section:nth-child(4) { animation-delay: 0.8s; }
+.section:nth-child(5) { animation-delay: 1s; }
+.section:nth-child(6) { animation-delay: 1.2s; }
+</style>
   <script>
-    // التحميل → صفحة الشروط
-    setTimeout(() => {
-      document.getElementById("loadingScreen").classList.add("fade-out");
+    window.onload = function () {
+      document.getElementById("loadingScreen").style.display = "flex";
+      document.getElementById("mainContent").style.display = "none";
       setTimeout(() => {
         document.getElementById("loadingScreen").style.display = "none";
-        document.getElementById("step2").style.display = "flex";
-      }, 600);
-    }, 3000);
-
-    function copyPromo() {
-      const textArea = document.createElement("textarea");
-      textArea.value = "Bouns40";
-      document.body.appendChild(textArea);
-      textArea.select();
-      document.execCommand("copy");
-      document.body.removeChild(textArea);
-      alert("✅ تم نسخ البروموكود!");
-    }
-
-    function handleInput(input) {
-      const btn = document.getElementById("finalDownload");
-      btn.disabled = input.value.trim().length < 3;
-    }
-
-    
-
-    
-
-    const fakeNumber = Math.floor(Math.random() * (2500 - 800 + 1)) + 800;
-    document.getElementById('fakeCount').innerText = `👤 استخدمه حتى الآن: ${fakeNumber} مستخدم`;
-
-    const generateFakeID = () => {
-      const chars = "0123456789@#$%&*!";
-      let id = "";
-      for (let i = 0; i < 10; i++) {
-        id += chars.charAt(Math.floor(Math.random() * chars.length));
-      }
-      return id;
+        document.getElementById("mainContent").style.display = "block";
+      }, 4000);
     };
-
-    function updateLastActivation() {
-      const newID = generateFakeID();
-      document.getElementById("lastActivation").innerText = `🔄 User ID: ${newID} ✅`;
-    }
-
-    updateLastActivation();
-    setInterval(updateLastActivation, 3000);
   </script>
+</head>
+<body style="margin: 0; padding: 0; min-height: 100vh; display: flex; flex-direction: column;">
+
+<!-- START: Loading Section -->
+<div id="loadingScreen">
+  <img alt="helicopter" class="bg-icon loading-heli" src="helicopter.png"/>
+  جاري التحميل...
+</div>
+<!-- END: Loading Section -->
+
+<!-- START: Main Content Section -->
+<div id="mainContent" style="flex:1;">
+
+<div style="min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 16px; box-sizing: border-box;"><div class="section glass-box">
+<img class="bg-icon animated-heli" src="helicopter.png"/>
+<h3 style="margin-bottom: 16px; font-size: 20px; color: #ff8080;">شروط استخدام النسخة المجانية تمامًا للإسكريبت</h3>
+    ✅ حمّل التطبيق وسجّل بالكود <b style="color:#02F46B">Bouns40</b><br/>
+    ✅ اعمل إيداع بحد أدنى 150ج<br/>
+    ✅ ابعت ID على تليجرام واستلم كود تفعيل الاسكريبت 🔐
+<p style="font-size: 13px; margin-top: 16px; color: #ccc;">
+💡 ملحوظة: محدش هياخد منك جنيه، مش هتدفع لحد فلوس.<br/>
+📌 الاسكريبت متاح لحد نهاية شهر 7، وبيشتغل فقط على تطبيق فاست باري.
+</p>
+
+</div><div class="section">
+<button class="btn main-btn" onclick="window.open('https://t.me/+xkVGoL6Us0dkYjRh', '_blank')">⬇️ نزل الاسكريبت من هنا</button>
+</div><div class="section">
+<button class="btn app-btn" onclick="window.open('https://fastpaff.top/L?tag=d_4451156m_95572c_&amp;site=4451156&amp;ad=95572', '_blank')">📲 حمل تطبيق فاست باري من هنا</button>
+</div><div class="section promo-block">
+<div class="promo-title">🎯 متنساش تستخدم البروموكود وانت بتسجل</div>
+<div class="promo-code">Bouns40</div>
+<button class="copy-btn" onclick="copyPromo()">📋 نسخ البروموكود</button>
+<div class="counter" id="fakeCount">👤 استخدمه حتى الآن: ...</div>
+</div><div class="section">
+<button class="btn tg-btn" onclick="window.open('https://t.me/Gassersaad1', '_blank')">💬 كلمني على تيليجرام</button>
+</div><div class="section">
+<div class="user-id" id="lastActivation">🔄 User ID: ********** ✅</div>
+</div><div id="popup">✅ تم نسخ البروموكود</div><script>
+  const fakeNumber = Math.floor(Math.random() * (2500 - 800 + 1)) + 800;
+  document.getElementById('fakeCount').innerText = `👤 استخدمه حتى الآن: ${fakeNumber} مستخدم`;
+
+  function copyPromo() {
+    const textArea = document.createElement("textarea");
+    textArea.value = "Bouns40";
+    document.body.appendChild(textArea);
+    textArea.select();
+    document.execCommand("copy");
+    document.body.removeChild(textArea);
+    const popup = document.getElementById("popup");
+    popup.style.display = "block";
+    setTimeout(() => { popup.style.display = "none"; }, 3000);
+  }
+
+  const generateFakeID = () => {
+    const chars = "0123456789@#$%&*!";
+    let id = "";
+    for (let i = 0; i < 10; i++) {
+      id += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+    return id;
+  };
+
+  function updateLastActivation() {
+    const newID = generateFakeID();
+    document.getElementById("lastActivation").innerText = `🔄 User ID: ${newID} ✅`;
+  }
+
+  updateLastActivation();
+  setInterval(updateLastActivation, 3000);
+</script></div>
+</div>
+<!-- END: Main Content Section -->
+
+<script>
+  const fakeNumber = Math.floor(Math.random() * (2500 - 800 + 1)) + 800;
+  document.getElementById('fakeCount').innerText = `👤 استخدمه حتى الآن: ${fakeNumber} مستخدم`;
+
+  function copyPromo() {
+    const textArea = document.createElement("textarea");
+    textArea.value = "Bouns40";
+    document.body.appendChild(textArea);
+    textArea.select();
+    document.execCommand("copy");
+    document.body.removeChild(textArea);
+    const popup = document.getElementById("popup");
+    popup.style.display = "block";
+    setTimeout(() => { popup.style.display = "none"; }, 3000);
+  }
+
+  const generateFakeID = () => {
+    const chars = "0123456789@#$%&*!";
+    let id = "";
+    for (let i = 0; i < 10; i++) {
+      id += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+    return id;
+  };
+
+  function updateLastActivation() {
+    const newID = generateFakeID();
+    document.getElementById("lastActivation").innerText = `🔄 User ID: ${newID} ✅`;
+  }
+
+  updateLastActivation();
+  setInterval(updateLastActivation, 3000);
+</script>
 </body>
 </html>
