@@ -1,12 +1,11 @@
 <!DOCTYPE html>
-
 <html dir="rtl" lang="ar">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>تحميل سكريبت التفاحة 🍎</title>
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&amp;display=swap" rel="stylesheet"/>
-<style>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>تحميل سكريبت التفاحة 🍎</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet"/>
+  <style>
 @keyframes loadingFadeIn {
   from {opacity: 0;}
   to {opacity: 1;}
@@ -327,96 +326,30 @@
 .section:nth-child(4) { animation-delay: 0.8s; }
 .section:nth-child(5) { animation-delay: 1s; }
 .section:nth-child(6) { animation-delay: 1.2s; }
-
-@media (max-width: 600px) {
-  body {
-    padding: 20px 10px !important;
-  }
-  .section {
-    margin-bottom: 16px !important;
-  }
-  .btn {
-    padding: 10px !important;
-    font-size: 14px !important;
-  }
-  .promo-code {
-    font-size: 18px !important;
-  }
-  .promo-title {
-    font-size: 14px !important;
-  }
-  .copy-btn {
-    padding: 6px 14px !important;
-    font-size: 13px !important;
-  }
-  .user-id {
-    font-size: 13px !important;
-  }
-  #loadingScreen img {
-    width: 100px !important;
-  }
-  h3 {
-    font-size: 16px !important;
-  }
-}
-
-@media (max-width: 600px) {
-  body {
-    padding: 10px 8px !important;
-  }
-  .section {
-    margin-bottom: 10px !important;
-  }
-  .btn {
-    padding: 8px !important;
-    font-size: 13px !important;
-  }
-  .promo-code {
-    font-size: 16px !important;
-  }
-  .promo-title {
-    font-size: 13px !important;
-  }
-  .copy-btn {
-    padding: 6px 10px !important;
-    font-size: 12px !important;
-  }
-  .user-id {
-    font-size: 12px !important;
-  }
-  #loadingScreen img {
-    width: 90px !important;
-  }
-  h3 {
-    font-size: 15px !important;
-    margin-bottom: 12px !important;
-  }
-  .glass-box {
-    padding: 16px 10px !important;
-    font-size: 14px !important;
-  }
-}
 </style>
-<script>
+  <script>
     window.onload = function () {
       document.getElementById("loadingScreen").style.display = "flex";
       document.getElementById("mainContent").style.display = "none";
       setTimeout(() => {
         document.getElementById("loadingScreen").style.display = "none";
         document.getElementById("mainContent").style.display = "block";
-      }, 2000);
+      }, 4000);
     };
   </script>
 </head>
 <body style="margin: 0; padding: 0; min-height: 100vh; display: flex; flex-direction: column;">
+
 <!-- START: Loading Section -->
 <div id="loadingScreen">
-<img alt="helicopter" class="bg-icon loading-heli" src="helicopter.png"/>
+  <img alt="helicopter" class="bg-icon loading-heli" src="helicopter.png"/>
   جاري التحميل...
 </div>
 <!-- END: Loading Section -->
+
 <!-- START: Main Content Section -->
 <div id="mainContent" style="flex:1;">
+
 <div style="min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 16px; box-sizing: border-box;"><div class="section glass-box">
 <img class="bg-icon animated-heli" src="helicopter.png"/>
 <h3 style="margin-bottom: 16px; font-size: 20px; color: #ff8080;">شروط استخدام النسخة المجانية تمامًا للإسكريبت</h3>
@@ -427,6 +360,7 @@
 💡 ملحوظة: محدش هياخد منك جنيه، مش هتدفع لحد فلوس.<br/>
 📌 الاسكريبت متاح لحد نهاية شهر 7، وبيشتغل فقط على تطبيق فاست باري.
 </p>
+
 </div><div class="section">
 <button class="btn main-btn" onclick="window.open('https://t.me/+xkVGoL6Us0dkYjRh', '_blank')">⬇️ نزل الاسكريبت من هنا</button>
 </div><div class="section">
@@ -475,6 +409,7 @@
 </script></div>
 </div>
 <!-- END: Main Content Section -->
+
 <script>
   const fakeNumber = Math.floor(Math.random() * (2500 - 800 + 1)) + 800;
   document.getElementById('fakeCount').innerText = `👤 استخدمه حتى الآن: ${fakeNumber} مستخدم`;
